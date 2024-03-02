@@ -18,3 +18,17 @@ export default function HomeScreen({ navigation }) {
   useEffect(() => {
     fetchPolls();
   }, []);
+
+  const fetchPolls = async() => {
+    getActivePolls()
+      .then((res) => {
+        setPolls(reverse(Object.values(res)))
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const handleRefresh = async () => {
+    setRefreshing(true);
+    await fetchPolls();
+    setRefreshing(false);
+  }
