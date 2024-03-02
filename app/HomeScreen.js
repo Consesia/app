@@ -7,3 +7,14 @@ import { getActivePolls } from "../flow/scripts";
 import { useEffect, useState } from "react";
 import { reverse } from "lodash";
 import moment from "moment";
+
+const StyledView = styled(View);
+
+export default function HomeScreen({ navigation }) {
+  const insets = useSafeAreaInsets();
+  const [refreshing, setRefreshing] = useState(false);
+  const [polls, setPolls] = useState([]);
+
+  useEffect(() => {
+    fetchPolls();
+  }, []);
