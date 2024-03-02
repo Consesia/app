@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { FlatList, Image, Pressable, RefreshControl, Text, View } from "react-native";
+import { FlatList, Image, Pressable, RefreshControl, Text, View , ActivityIndicator} from "react-native";
 import { styled } from "nativewind";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Feather from "@expo/vector-icons/Feather";
@@ -14,7 +14,7 @@ const StyledView = styled(View);
 export default function HomeScreen({ navigation }) {
   const insets = useSafeAreaInsets();
   const [refreshing, setRefreshing] = useState(false);
-  const [polls, setPolls] = useState([]);
+  const [polls, setPolls] = useState(null);
 
   useEffect(() => {
     fetchPolls();
@@ -35,6 +35,7 @@ export default function HomeScreen({ navigation }) {
   }
 
   return (
+    
     <StyledView
       className="bg-dark h-full"
       style={{
@@ -47,6 +48,8 @@ export default function HomeScreen({ navigation }) {
       <Image className="h-6 w-32 mt-3 mb-6" source={require("../assets/img/logo.png")} />
       <Text className="text-white opacity-50 tracking-widest font-bold text-xs mb-2">ONGOING POLL</Text>
 
+      {!polls? <ActivityIndicator size="large" color="#FACC15" /> :
+
       <FlatList
         data={polls}
         renderItem={({ item }) => <VoteItem pollId={item.id} title={item.title} color={item.color} createdBy={item.createdBy} time={item.endedAt} navigation={navigation} />}
@@ -57,7 +60,7 @@ export default function HomeScreen({ navigation }) {
             onRefresh={handleRefresh}
           />
         }
-      />
+      />}
     </StyledView>
   );
 }

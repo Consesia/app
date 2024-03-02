@@ -1,6 +1,6 @@
 import * as fcl from "@onflow/fcl/dist/fcl-react-native";
 import { StatusBar } from "expo-status-bar";
-import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
+import { FlatList, Image, Text, TouchableOpacity, View , ActivityIndicator } from "react-native";
 import { styled } from "nativewind";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useEffect, useState } from "react";
@@ -17,15 +17,15 @@ export default function AccountScreen({ navigation }) {
   const insets = useSafeAreaInsets();
   const [tab, setTab] = useState("poll");
   const [user, setUser] = useState({ loggedIn: null });
-  const [myPolls, setMyPolls] = useState([]);
+  const [myPolls, setMyPolls] = useState(null);
   const [refreshing, setRefreshing] = useState(false);
-  const [myVoted, setMyVoted] = useState([]);
+  const [myVoted, setMyVoted] = useState(null);
 
   useEffect(() => fcl.currentUser.subscribe(setUser), []);
 
   useEffect(() => {
     fetchMyPolls();
-  }, []);
+  }, [myPolls]);
 
   const fetchMyPolls = async () => {
     getAllPolls()
@@ -114,6 +114,8 @@ export default function AccountScreen({ navigation }) {
           </TouchableOpacity>
         </StyledView>
         {tab === "poll" && (
+          (!myPolls? <ActivityIndicator size="large" color="#FACC15" /> :
+
           <FlatList
             data={myPolls}
             renderItem={({ item }) => (
@@ -135,8 +137,10 @@ export default function AccountScreen({ navigation }) {
               />
             }
           />
-        )}
+        ))}
         {tab === "voted" && (
+          
+        (!myVoted? <ActivityIndicator size="large" color="#FACC15" /> :
           <FlatList
             data={myVoted}
             renderItem={({ item }) => (
@@ -158,7 +162,7 @@ export default function AccountScreen({ navigation }) {
               />
             }
           />
-        )}
+        ))}
       </StyledView>
     </StyledView>
   );
