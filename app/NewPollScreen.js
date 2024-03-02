@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { ActivityIndicator, Button, ScrollView, Switch, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, Button, ScrollView, Switch, Text, TextInput, TouchableOpacity, View, Image } from "react-native";
 import { styled } from "nativewind";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Feather from "@expo/vector-icons/Feather";
@@ -9,6 +9,7 @@ import { Toast } from "react-native-toast-message/lib/src/Toast";
 import { uniq } from "lodash";
 import { createNewPoll } from "../flow/transactions";
 import * as fcl from "@onflow/fcl/dist/fcl-react-native";
+import trash from "../assets/img/trash.png";
 
 const StyledView = styled(View);
 
@@ -91,7 +92,7 @@ export default function NewPollScreen({ navigation }) {
                   setOptions(lastOptions);
                 }}
                 value={i}
-                className="flex-1 h-14 bg-white/20 rounded-xl px-4 text-white mb-2 border border-white/20"
+                className="flex-1 h-14 bg-white/20 rounded-xl px-1 text-white mb-2 border border-white/20"
               />
               <TouchableOpacity
                 className="ml-4"
@@ -101,7 +102,7 @@ export default function NewPollScreen({ navigation }) {
                   setOptions(lastOptions);
                 }}
               >
-                <Feather name="trash" size={16} color="#f43f5e" />
+                <Text>❌</Text>
               </TouchableOpacity>
             </StyledView>
           ))}
@@ -171,7 +172,7 @@ export default function NewPollScreen({ navigation }) {
         <StyledView
           className={`w-full h-14 bg-amber-400 rounded-full flex flex-row items-center justify-center shadow shadow-amber-500/50 ${loading && "opacity-75"}`}
         >
-          {loading ? <ActivityIndicator /> : <Feather name="send" size={16} color="#222" />}
+          {loading ? <ActivityIndicator /> : ""}
           <Text className="font-bold ml-2">{loading ? "POSTING..." : "POST NOW"}</Text>
         </StyledView>
       </TouchableOpacity>

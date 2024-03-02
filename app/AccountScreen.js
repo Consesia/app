@@ -9,6 +9,7 @@ import Feather from "@expo/vector-icons/Feather";
 import { getAllPolls } from "../flow/scripts";
 import { filter, reverse } from "lodash";
 import { VoteItem } from "./HomeScreen";
+import logout from "../assets/img/logout.png";
 
 const StyledView = styled(View);
 
@@ -58,10 +59,10 @@ export default function AccountScreen({ navigation }) {
       <StatusBar style="light" />
       <StyledView className="h-48 flex items-center justify-center">
         <TouchableOpacity
-          className="absolute top-3 right-3"
+          className="absolute top-[-30] right-[-20]"
           onPress={() => fcl.unauthenticate()}
         >
-          <Feather name="log-out" size={24} color="white" />
+          <Image source={logout} className="h-36 w-24" />
         </TouchableOpacity>
         <StyledView className="border-2 w-24 h-24 p-1.5 border-white/20 rounded-full border-dashed mb-3">
           <Image
@@ -84,11 +85,6 @@ export default function AccountScreen({ navigation }) {
                 tab === "poll" && "bg-white"
               }`}
             >
-              <Feather
-                name="layers"
-                size={16}
-                color={`${tab === "poll" ? "#222" : "#fff"}`}
-              />
               <Text
                 className={`font-medium ml-2 ${
                   tab === "poll" ? "text-dark" : "text-white"
@@ -107,11 +103,6 @@ export default function AccountScreen({ navigation }) {
                 tab === "voted" && "bg-white"
               }`}
             >
-              <Feather
-                name="check-circle"
-                size={16}
-                color={`${tab === "voted" ? "#222" : "#fff"}`}
-              />
               <Text
                 className={`font-medium ml-2 ${
                   tab === "voted" ? "text-dark" : "text-white"

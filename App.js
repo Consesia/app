@@ -6,11 +6,16 @@ import { Image, Text, TouchableOpacity, View } from "react-native";
 import HomeScreen from "./app/HomeScreen";
 import VoteDetailScreen from "./app/VoteDetailScreen";
 import AccountScreen from "./app/AccountScreen";
-import Feather from "@expo/vector-icons/Feather";
+import { Feather } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 import NewPollScreen from "./app/NewPollScreen";
 import * as fcl from "@onflow/fcl/dist/fcl-react-native";
 import { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
+import home from "./assets/img/home.png";
+import plus from "./assets/img/plus.png";
+import user from "./assets/img/profile.png";
+import share from "./assets/img/share.png";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -69,7 +74,7 @@ export default function App() {
   return (
     <View className="flex h-full items-center justify-center bg-dark">
       <StatusBar style="light" />
-      <Image className="h-6 w-32 mt-3 mb-3" source={require("./assets/img/logo.png")} />
+      <Image className="h-6 w-56 mt-3 mb-8 p-5" source={require("./assets/img/logo.png")} />
       <Text className="font-bold text-white mb-12">Mobile Voting on the Blockchain</Text>
 
       <Text className="text-white/50 mb-3">Connect Your Wallet to Continue</Text>
@@ -119,19 +124,18 @@ function MyTabBar({ state, descriptors, navigation }) {
           >
             <View className="h-full flex items-center justify-center mb-2">
               {label === "Home" && (
-                <View className={`w-12 h-12 rounded-full flex items-center justify-center ${isFocused && "bg-white"}`}>
-                  <Feather name="home" size={24} color={`${isFocused ? "#222" : "#fff"}`} />
+                <View className={`w-12 h-12 rounded-full flex items-center justify-center`}>
+                  <Image source={home} className={`w-24 h-24 `} />
                 </View>
               )}
               {label === "NewPoll" && (
                 <View className={`flex flex-row gap-1 items-center justify-center rounded-full w-36 h-12 ${isFocused ? "bg-white" : "bg-white/10"}`}>
-                  <Feather name="plus" size={24} color={`${isFocused ? "#222" : "#fff"}`} />
                   <Text className={`font-bold text-sm ${isFocused ? "text-dark" : "text-white"}`}>New Poll</Text>
                 </View>
               )}
               {label === "Account" && (
-                <View className={`w-12 h-12 rounded-full flex items-center justify-center ${isFocused && "bg-white"}`}>
-                  <Feather name="user" size={24} color={`${isFocused ? "#222" : "#fff"}`} />
+                <View className={`w-12 h-12 rounded-full flex items-center justify-center`}>
+                  <Image source={user} className=" w-48 h-48" />
                 </View>
               )}
             </View>
