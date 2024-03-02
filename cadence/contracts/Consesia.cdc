@@ -1,4 +1,4 @@
-pub contract Mevota {
+pub contract Consesia {
     pub var polls: {UInt64: Poll}
     pub var pollCounter: UInt64
 
