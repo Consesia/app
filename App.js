@@ -85,3 +85,59 @@ export default function App() {
     </View>
   );
 }
+
+function MyTabBar({ state, descriptors, navigation }) {
+  return (
+    <View className="h-20 flex flex-row items-center justify-between gap-1" style={{ backgroundColor: "#222222" }}>
+      {state.routes.map((route, index) => {
+        const { options } = descriptors[route.key];
+        const label = options.tabBarLabel !== undefined ? options.tabBarLabel : options.title !== undefined ? options.title : route.name;
+
+        const isFocused = state.index === index;
+
+        const onPress = () => {
+          const event = navigation.emit({
+            type: "tabPress",
+            target: route.key,
+            canPreventDefault: true,
+          });
+
+          if (!isFocused && !event.defaultPrevented) {
+            navigation.navigate({ name: route.name, merge: true });
+          }
+        };
+
+        return (
+          <TouchableOpacity
+            accessibilityRole="button"
+            accessibilityState={isFocused ? { selected: true } : {}}
+            accessibilityLabel={options.tabBarAccessibilityLabel}
+            testID={options.tabBarTestID}
+            onPress={onPress}
+            style={{ flex: 1 }}
+            key={label}
+          >
+            <View className="h-full flex items-center justify-center mb-2">
+              {label === "Home" && (
+                <View className={`w-12 h-12 rounded-full flex items-center justify-center ${isFocused && "bg-white"}`}>
+                  <Feather name="home" size={24} color={`${isFocused ? "#222" : "#fff"}`} />
+                </View>
+              )}
+              {label === "NewPoll" && (
+                <View className={`flex flex-row gap-1 items-center justify-center rounded-full w-36 h-12 ${isFocused ? "bg-white" : "bg-white/10"}`}>
+                  <Feather name="plus" size={24} color={`${isFocused ? "#222" : "#fff"}`} />
+                  <Text className={`font-bold text-sm ${isFocused ? "text-dark" : "text-white"}`}>New Poll</Text>
+                </View>
+              )}
+              {label === "Account" && (
+                <View className={`w-12 h-12 rounded-full flex items-center justify-center ${isFocused && "bg-white"}`}>
+                  <Feather name="user" size={24} color={`${isFocused ? "#222" : "#fff"}`} />
+                </View>
+              )}
+            </View>
+          </TouchableOpacity>
+        );
+      })}
+    </View>
+  );
+}
