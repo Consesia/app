@@ -1,4 +1,4 @@
-pub contract Consesia {
+pub contract Mevota {
     pub var polls: {UInt64: Poll}
     pub var pollCounter: UInt64
 
@@ -102,6 +102,45 @@ pub contract Consesia {
 
         self.polls[newId] = poll
         self.pollCounter = newId
+    }
+
+    pub fun isPollActive(pollId: UInt64): Bool {
+        let poll = self.polls[pollId] ?? panic("Poll not found")
+        let currentTime = getCurrentBlock().timestamp
+        return poll.startedAt <= getCurrentBlock().timestamp && poll.endedAt >= getCurrentBlock().timestamp
+    }
+
+    pub fun getAllPolls(): {UInt64: Poll} {
+        return self.polls
+    }
+
+    pub fun getActivePolls(): {UInt64: Poll} {
+        let activePolls: {UInt64: Poll} = {}
+
+        // Iterate through all polls and filter out the active ones
+        for poll in self.polls.values {
+            if self.isPollActive(pollId: poll.id) {
+                activePolls[poll.id] = poll
+            }
+        }
+
+        return activePolls
+    }
+
+    pub fun getPollResult(pollId: UInt64): {String: UInt64} {
+        let poll = self.polls[pollId] ?? panic("Poll not found")
+        var resultVote: {String: UInt64} = {}
+
+        // Iterate through the votes and count the results
+        for vote in poll.votes.values {
+            if resultVote[vote] == nil {
+                resultVote[vote] = 1
+            } else {
+                resultVote[vote] = resultVote[vote]! + 1
+            }
+        }
+
+        return resultVote
     }
 
     init() {
