@@ -1,3 +1,4 @@
+import { StatusBar } from "expo-status-bar";
 import { ActivityIndicator, Button, FlatList, Image, Modal, Pressable, ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { styled } from "nativewind";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -7,7 +8,6 @@ import { Toast } from "react-native-toast-message/lib/src/Toast";
 import * as fcl from "@onflow/fcl/dist/fcl-react-native";
 import { addVoter, votePoll } from "../flow/transactions";
 import { find, map, sum } from "lodash";
-
 
 const StyledView = styled(View);
 
@@ -247,3 +247,26 @@ export default function VoteDetailScreen({ route, navigation }) {
     </StyledView>
   );
 }
+
+const VotersItem = ({ address, vote }) => (
+  <StyledView className="w-full flex flex-row items-center justify-between mb-2">
+    <StyledView className="flex flex-row items-center">
+      <Image className="shrink-0 w-7 h-7 object-cover rounded-full mr-2" source={{ uri: `https://www.gravatar.com/avatar/${address}?s=200&r=pg&d=retro` }} />
+      <Text className="text-white text-lg text-white/50">
+        {address.substr(0, 4)}...{address.substr(-4, 4)}
+      </Text>
+    </StyledView>
+    <StyledView>
+      {vote === "" ? (
+        <Text className="text-white/50">
+          -
+        </Text>
+      ) : (
+        <Text className="text-white/50">
+          Voted {vote.substr(0, 10)}
+          {vote.length > 10 && "..."}
+        </Text>
+      )}
+    </StyledView>
+  </StyledView>
+);
