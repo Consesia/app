@@ -1,0 +1,10 @@
+import * as fcl from "@onflow/fcl/dist/fcl-react-native";
+import { StatusBar } from "expo-status-bar";
+import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
+import { styled } from "nativewind";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useEffect, useState } from "react";
+import Feather from "@expo/vector-icons/Feather";
+import { getAllPolls } from "../flow/scripts";
+import { filter, reverse } from "lodash";
+import { VoteItem } from "./HomeScreen";
