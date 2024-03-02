@@ -12,7 +12,14 @@ transaction (title: String, options: [String], color: String, startedAt: UFix64,
 	}
 }`;
 
-export async function createNewPoll(title, options, color, startedAt, endedAt, isRestricted) {
+export async function createNewPoll(
+  title,
+  options,
+  color,
+  startedAt,
+  endedAt,
+  isRestricted
+) {
   return fcl.mutate({
     cadence: CREATE_NEW_POLL,
     args: (arg, t) => [
@@ -45,10 +52,7 @@ transaction (pollId: UInt64, option: String) {
 export async function votePoll(pollId, option) {
   return fcl.mutate({
     cadence: VOTE_POLL,
-    args: (arg, t) => [
-      arg(pollId, t.UInt64),
-      arg(option, t.String),
-    ],
+    args: (arg, t) => [arg(pollId, t.UInt64), arg(option, t.String)],
     payer: fcl.authz,
     proposer: fcl.authz,
     authorizations: [fcl.authz],
@@ -77,10 +81,7 @@ transaction (pollId: UInt64, voter: Address) {
 export async function addVoter(pollId, voter) {
   return fcl.mutate({
     cadence: ADD_ALLOWED_VOTERS,
-    args: (arg, t) => [
-      arg(pollId, t.UInt64),
-      arg(voter, t.Address),
-    ],
+    args: (arg, t) => [arg(pollId, t.UInt64), arg(voter, t.Address)],
     payer: fcl.authz,
     proposer: fcl.authz,
     authorizations: [fcl.authz],

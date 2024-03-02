@@ -8,5 +8,5 @@ config({
   "discovery.wallet": "https://fcl-discovery.onflow.org/testnet/authn",
   "discovery.authn.endpoint":
   "https://fcl-discovery.onflow.org/api/testnet/authn",
-  "0xConsesia": "0xbad97359ec664292",
+  "0xConsesia": "0x0f511442a071f631",
 });

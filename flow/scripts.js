@@ -24,7 +24,6 @@ export async function getActivePolls() {
   });
 }
 
-
 const GET_DETAIL_POLL = `
 import Consesia from 0xConsesia
 pub fun main(pollId: UInt64): Consesia.Poll {
@@ -35,9 +34,7 @@ pub fun main(pollId: UInt64): Consesia.Poll {
 export async function getDetailPoll(pollId) {
   return fcl.query({
     cadence: GET_DETAIL_POLL,
-    args: (arg, t) => [
-			arg(pollId, t.UInt64), 
-		],
+    args: (arg, t) => [arg(pollId, t.UInt64)],
   });
 }
 
@@ -50,8 +47,6 @@ pub fun main(pollId: UInt64): {String: UInt64} {
 export async function getPollResult(pollId) {
   return fcl.query({
     cadence: GET_POLL_RESULT,
-    args: (arg, t) => [
-			arg(pollId, t.UInt64), 
-		],
+    args: (arg, t) => [arg(pollId, t.UInt64)],
   });
 }
