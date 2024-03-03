@@ -81,8 +81,7 @@ export default function App() {
       {!isLoading &&
         services.map((service, index) => (
           <TouchableOpacity onPress={() => authenticateService(service)} key={service?.provider?.address ?? index}>
-            <View className="w-64 p-1 rounded-full flex flex-row items-center justify-center" style={{ backgroundColor: service?.provider?.color }}>
-              <Image className="h-6 w-6 mt-3 mb-2 mr-2" source={{ uri: service?.provider?.icon }} />
+            <View className=" w-64 h-10 p-1 rounded-full flex flex-row items-center justify-center" style={{ backgroundColor: service?.provider?.color }}>
               <Text className="text-dark font-bold">{service?.provider?.name}</Text>
             </View>
           </TouchableOpacity>
