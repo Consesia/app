@@ -18,3 +18,5 @@ Install Consesia with npm
 
 
 **PPT link: https://www.canva.com/design/DAF-bJSq0a4/ok8aseBtgC64VlvB_h7rAw/edit?utm_content=DAF-bJSq0a4&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
+
+**Video link: https://youtu.be/N3H0mRFHo2E?feature=shared
